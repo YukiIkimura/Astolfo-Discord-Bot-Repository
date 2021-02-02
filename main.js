@@ -2,10 +2,10 @@ const Discord = require("discord.js");
 require('dotenv').config();
 const bot = new Discord.Client();
 const client = new Discord.Client();
-
 const TOKEN = process.env.TOKEN;
 
 client.login(TOKEN);
+
 
 bot.on('ready', () => {
     console.info(`Logged in as ${bot.user.tag}!`);
@@ -13,12 +13,12 @@ bot.on('ready', () => {
 //message read and send after the "ping" command
 bot.on('message', msg => {
     if (msg.content === 'ping') {
-        msg.reply('Hey  ${taggedUser.username}!');
+        const taggedUser = msg.mentions.users.first();
+        msg.reply( 'Hey ${taggedUser.username}' );
         
 
     } else if (msg.content.startsWith('!kick')) {
         if (msg.mentions.users.size) {
-            const taggedUser = msg.mentions.users.first();
             msg.channel.send(`You wanted to kick: ${taggedUser.username}. you know your reasons i guess`);
         } else {
             msg.reply('Just enter a valid user! Baka! ');
