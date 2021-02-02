@@ -1,15 +1,17 @@
 const Discord = require("discord.js");
 require('dotenv').config();
+const bot = new Discord.Client();
 const client = new Discord.Client();
+
 const TOKEN = process.env.TOKEN;
 
 client.login(TOKEN);
 
-client.on('ready', () => {
-    console.info(`Logged in as ${client.user.tag}!`);
+bot.on('ready', () => {
+    console.info(`Logged in as ${bot.user.tag}!`);
 });
 //message read and send after the "ping" command
-client.on('message', msg => {
+bot.on('message', msg => {
     if (msg.content === 'ping') {
         msg.reply('Hey  ${taggedUser.username}!');
         
@@ -39,12 +41,12 @@ for(const file of commandFiles){
     client.commands.set(command.name, command);
 }
  
- 
-client.once('ready', () => {
+
+bot.once('ready', () => {
     console.log('Operation Astolfo Is Starting....');
 });
- 
-client.on('message', message =>{
+
+bot.on('message', message => {
     if(!message.content.startsWith(prefix) || message.author.bot) return;
  
     const args = message.content.slice(prefix.length).split(/ +/);
@@ -68,5 +70,5 @@ client.on('message', message =>{
         client.commands.get('unmute').execute(message, args);
     }
 });
- 
-client.login(process.env.DISCORD_TOKEN);
+
+bot.login(process.env.DISCORD_TOKEN);
